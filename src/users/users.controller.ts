@@ -19,38 +19,40 @@ import { IUser } from './users.interface';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @ResponseMessage("Create a new User")
+  @ResponseMessage('Create a new User')
   @Post()
   async create(@Body() createUserDto: CreateUserDto, @User() user: IUser) {
     let newUser = await this.usersService.create(createUserDto, user);
     return {
       _id: newUser?._id,
-      createdAt: newUser?.createdAt
-    }
+      createdAt: newUser?.createdAt,
+    };
   }
 
   @Get()
-  @ResponseMessage("Fetch user with paginate")
-  findAll(@Query("page")currentPage: string,
-      @Query("limit")limit: string,
-      @Query()qs: string) {
+  @ResponseMessage('Fetch user with paginate')
+  findAll(
+    @Query('current') currentPage: string,
+    @Query('pageSize') limit: string,
+    @Query() qs: string,
+  ) {
     return this.usersService.findAll(+currentPage, +limit, qs);
   }
 
   @Public()
-  @ResponseMessage("Fetch user by id")
+  @ResponseMessage('Fetch user by id')
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(id); // + là convert từ string -> number
   }
 
-  @ResponseMessage("Update a User")
+  @ResponseMessage('Update a User')
   @Patch()
-  update(@Body() updateUserDto: UpdateUserDto, @User() user:IUser) {
+  update(@Body() updateUserDto: UpdateUserDto, @User() user: IUser) {
     return this.usersService.update(updateUserDto, user);
   }
 
-  @ResponseMessage("Delete a User")
+  @ResponseMessage('Delete a User')
   @Delete(':id')
   remove(@Param('id') id: string, @User() user: IUser) {
     return this.usersService.remove(id, user);

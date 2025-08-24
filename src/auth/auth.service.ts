@@ -110,7 +110,7 @@ export class AuthService {
       });
 
       let user = await this.usersService.findUserByToken(refreshToken);
-      console.log('User:', user);
+
       if (user) {
         const { _id, name, email, role } = user;
         const payload = {

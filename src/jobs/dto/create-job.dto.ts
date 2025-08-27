@@ -19,6 +19,9 @@ class Company {
 
   @IsNotEmpty()
   name: string;
+
+  @IsNotEmpty()
+  logo: string;
 }
 
 export class CreateJobDto {
@@ -48,6 +51,9 @@ export class CreateJobDto {
 
   @IsNotEmpty({ message: 'Description không được để trống' })
   description: string;
+
+  @IsNotEmpty({ message: 'Location không được để trống' })
+  location: string;
 
   @IsNotEmpty({ message: 'startDate không được để trống' })
   @Transform(({ value }) => new Date(value))

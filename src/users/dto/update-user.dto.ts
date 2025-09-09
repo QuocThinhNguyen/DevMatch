@@ -35,7 +35,7 @@ export class UpdateUserDto extends OmitType(CreateUserDto, [
 
   address: string;
 
-  role: string;
+  role: mongoose.Schema.Types.ObjectId;
 
   @IsNotEmptyObject()
   @IsObject()
